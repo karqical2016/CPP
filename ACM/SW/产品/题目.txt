@@ -1,0 +1,44 @@
+问题16：产品组装检查
+
+某公司的工厂里生产各种各样的产品。此公司中生成的产品是组装各种组件生产的，这些组件是组装零件制造的。
+也就是一个组件是组装各种零件制造，一个产品是组装这些组件制造。此工厂取给零件的固有识别符合为A到Z的零件并且生产用这些零件组合制造的组件和产品。
+
+组装一个组件中所需要的零件字符串按照组装的顺序指定，并且指定任意零件的字符串时，
+
+如下判断是否可以用任意零件的字符串生产该组件。根据组装工序的特性，比较两个零件的字符串，
+
+如果第一个零件的字符和最后一个零件的字符相同，其余零件的字符是种类和其数量一致时，
+
+用任意零件的字符串可以组装该组件的。比如A组件所需要的6个零件的字符串为按组装顺序是EEDHIA时，
+
+EHIEDA的零件字符串是可以生成A组件，但是FEDHIA，EDDHIA，EEDBIA等零件的字符串是不能生成A组件的。
+
+该工厂为了生产某产品所需要的组件数量和各组件所需要的零件字符按照组装顺序指定，并且指定各组件的任意零件的字符串时，用任意零件的字符串制造的组件，请编写输出其数量的程序。
+
+[输入]
+第一行Test Case的数T，从下一行开始指定T个的Test Case.  每个Test Case是由3行构成，在第一行指定产品生产中所需要的组件的数N. 下一行指定各组件在生产中所需要的零件字符串以空白来区分，下下一行也是与上一行一样，按照组件的顺序任意零件的字符串以空白来区分指定的。但是，N为1以上20以下的自然数。
+
+[输出]
+每行以#x开始（x是Test Case的编号），空一格后输出用任意零件字符串制造的组件数量。
+
+[输入输出的例]
+（输入）
+4
+4
+WUNYO EKHSLDK WNQRT MRTDN
+WUNYO EKHSLDK WNQRT MRTDN
+4
+VTKROS VHSNIYERK QIPJMMI MLPI
+BTABED VSIYNREIK QPMJIMI MPLI
+5
+PXWXLMGI MSDTIXOJS GYJYTDEN AHQV VPHUMUIWE
+PYWXMGLI MSDTIXOJU GYYEDTJN AQHV VHPMUIUWE
+6
+TRNMU PYES NEYTILM FAKPP MNRV EAYDI
+TNRMU PEYS NTEYMIM FPAKQ MRRV EDAYI
+
+（输出）
+#1 4
+#2 2
+#3 3
+#4 3

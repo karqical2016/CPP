@@ -1,0 +1,4 @@
+﻿  solution.cpp
+d:\work\021_c++\acm\sw\1001\solution.cpp(36): warning C4018: “<”: 有符号/无符号不匹配
+  1001.vcxproj -> C:\Users\SDSC\Source\Repos\GitCPP\CPP\ACM\Debug\1001.exe
+  1001.vcxproj -> C:\Users\SDSC\Source\Repos\GitCPP\CPP\ACM\Debug\1001.pdb (Partial PDB)

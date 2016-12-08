@@ -1,0 +1,186 @@
+如上图所示，一个6行5列的区域， 兔子从(2,1)点开始跳跃，初始方向为右下方45度，正常步为每秒两个方格，
+但是若当时兔子的位置距离墙壁小于两个方格，则兔子只能在接下来的1秒钟移动1格。
+当兔子碰到墙壁后，会改变方向，新方向与原方向呈90度。如此这样。。。
+
+这个问题需要求解：n秒之后兔子到达的位置。
+
+特殊情况： 如果兔子跳向矩形区域的4个顶点(0,0)，(5, 0), (0, 6), (5, 6), 那么会沿原路折返。
+
+输入：
+第一行：test case 的数量。
+
+第二行：行数 列数
+第三行：出发点坐标
+第四行：经过时间
+…以下重复第二行~第四行
+…
+
+输出：
+到达点坐标
+   
+[输入示例]
+3
+6  5
+2  1
+4
+5  4
+2  0
+5
+8  8
+0  0
+10
+[输出示例]
+#1  1 4
+#2  2 0
+#3  4 4
+
+
+
+
+
+
+
+#include<iostream>
+using namespace std;
+typedef struct
+{
+	size_t x;
+	size_t y;
+}Point;
+
+int main(void) {
+	int test_count;
+	freopen("input.txt", "r", stdin);
+	cin >> test_count;
+
+	
+	int N;//行数
+	int M;//列数
+	int X, Y;//出发点坐标	
+	int T;//经过时间
+	int flagX, flagY;//flag 为X,Y的上升标志位 
+
+	for (int test_case = 1; test_case <= test_count; test_case++)
+	{
+		
+		cin >> N >> M >> X >> Y >> T;
+		
+		flagX = 1;
+		flagY = 1;
+		while (T>0)
+		{
+
+			if (flagX == 1 && flagY == 1)//如果X增大,Y增大，即向右下角移动
+			{
+				if (M - X > 2) {//如果当前点距离右边大于2,则X直接向右下角移动2位
+					
+					if (N - Y > 2) {//如果当前点距离右边大于2,则Y直接向右下角移动2位
+						X = X + 2;
+						Y = Y + 2;						
+						flagX = 1;
+						flagY = 1;
+					}
+					else if(N-Y==2)
+					{
+						X = X + 2;
+						Y = Y + 2;						
+						flagX = -1;
+						flagY = 1;
+					}
+					else if(N-Y==1)
+					{
+						X = X + 1;
+						Y = Y + 1;
+						flagX = -1;
+						flagY = 1;
+					}
+					else if(N-Y==0)
+					{
+						X = X + 2;
+						Y = Y + 2;
+						flagX = 1;
+						flagY = -1;
+					}
+					
+				}
+				else if(M-X==2)
+				{
+					if (N - Y > 2) {//如果当前点距离右边大于2,则Y直接向右下角移动2位
+						X = X + 2;
+						Y = Y + 2;
+						flagX = -1;
+						flagY = 1;
+					}
+					else if (N - Y == 2)
+					{
+						X = X + 2;
+						Y = Y + 2;
+						flagX = -1;
+						flagY = -1;
+					}
+					else if (N - Y == 1)
+					{
+						X = X + 1;
+						Y = Y + 1;
+						flagX = 1;
+						flagY = -1;
+					}
+					else if (N - Y == 0) {
+						X = X + 1;
+						Y = Y + 1;
+						flagX = 1;
+						flagY = -1;
+					}
+				}
+				else if(M-X==1)
+				{
+					if (N - Y > 2) {//如果当前点距离右边大于2,则Y直接向右下角移动2位
+						X = X + 1;
+						Y = Y + 1;
+						flagX = -1;
+						flagY = 1;
+					}
+					else if (N - Y == 2)
+					{
+						X = X + 1;
+						Y = Y + 1;
+						flagX = -1;
+						flagY = -1;
+					}
+					else if (N - Y == 1)
+					{
+						X = X + 1;
+						Y = Y + 1;
+						flagX = -1;
+						flagY = -1;
+					}
+					else if (N - Y == 0) {
+						X = X + 1;
+						Y = Y - 1;
+						flagX = 1;
+						flagY = -1;
+					}
+				}
+
+			}
+			if (flagX == 1 && flagY == -1)//如果X增大，Y减小，即向右上角移动
+			{
+				auto ss = 1;
+			}
+			if (flagX == -1 && flagY == 1)//如果X减小，Y增大，即向左下角移动
+			{
+				auto ss = 1;
+			}
+			if (flagX == -1 && flagY == -1)//如果X增大，Y减小，即向左上角移动
+			{
+				auto ss = 1;
+			}
+
+			T--;
+			
+		}
+		cout << "#" << test_case << " " << X<<" "<<Y << endl;
+	}
+	for (;;);
+	return 0;
+}

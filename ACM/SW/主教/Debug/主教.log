@@ -1,0 +1,5 @@
+﻿  Solution.cpp
+d:\work\021_c++\acm\sw\主教\solution.cpp(15): warning C4018: “<”: 有符号/无符号不匹配
+d:\work\021_c++\acm\sw\主教\solution.cpp(19): warning C4018: “<”: 有符号/无符号不匹配
+  主教.vcxproj -> C:\Users\SDSC\Source\Repos\GitCPP\CPP\ACM\Debug\主教.exe
+  主教.vcxproj -> C:\Users\SDSC\Source\Repos\GitCPP\CPP\ACM\Debug\主教.pdb (Full PDB)

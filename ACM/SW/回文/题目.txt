@@ -1,0 +1,196 @@
+回文
+
+回文是指从前和从后读时均为左右对称的语句。例如 madam, elle, MOM, ZZZZZ 等即为回文。
+
+在本问题中至少三个文字以上的语句看作为回文。即 A、BB 等不能成为回文。 
+现在长的字符串中要查找回文。
+
+作为一个例子，请看以下字符串。
+
+A V F S I O A A O I D A G E P L A R F E G R T H T R G E F W X G G H
+
+上面的字符串中共计7个回文。 
+蓝色部分有 IOAAOI, OAAO 2个, 红色部分有 FEGRTHTRGEF, EGRTHTRGE, GRTHTRG, RTHTR, THT 5个，绿色部分的 GG 如上所述，不是回文。 
+
+在这7个回文中最长的回文是 FEGRTHTRGEF, 长度为 11。
+请以这种方法编辑在字符串中求得长度最长的回文的程序。
+
+
+[限制条件]
+1. 字符串的长度L 为 3 以上 100 以下的整数。
+2. 字符串仅可由大写罗马字母(A ~ Z)组成。
+3. 回文的长度为3以上。 
+
+
+[输入 ]
+输入构成如下。
+首行给定测试用例的个数 T。
+之后T个测试用例按照顺序给定。
+各测试用例为一行,
+首先给定字符串的长度 L, 之后给定长度 L的字符串。字符串的长度 L 与字符串之间用空格区分。
+
+[输出 ]
+各行以 #x 开头，(x 为测试用的编号 ) 留一个空格后, 按照问题的要求，输出字符串中最长回文的长度。
+
+[输入输出示例]
+(输入 )
+3
+34 AVFSIOAAOIDAGEPLARFEGRTHTRGEFWXGGH
+10 XXYYZZWWUU
+7 YOPQQPO
+
+(输出 )
+#1 11
+#2 0
+#3 6
+
+
+[基础源代码]
+import java.util.Scanner;
+import java.io.FileInputStream;
+
+/*
+使用的类名应为 Solution, 推荐尽可能使用 Solution.java。
+即便在这种情况，仍然可以通过 java Solution 命令执行程序。
+*/
+class Solution
+{
+	static int L, Answer;
+	
+	public static void main(String args[]) throws Exception
+	{
+		/*
+以下 Method 调用代码的含义是今后以读取文件来代替标准输入（键盘）。
+但为了计分，提交代码时必须删除 Method 或进行注释处理。
+		*/
+		//System.setIn(new FileInputStream("C:\\sample_input.txt"));
+
+		String S;
+
+		Scanner sc = new Scanner(System.in);
+		int T = sc.nextInt();
+
+		for(int test_case = 1; test_case <= T; test_case++)
+		{
+
+			/*
+在标准输入中读取各测试用例。
+
+			*/
+			L = sc.nextInt();
+			S = sc.next();
+
+			//////////////////////////////////////////////////////////////////////
+			/*
+此部分包含各位实现 Algorithm。
+假设各位的正确答案被保存到 Answer 中。
+			 */
+			/////////////////////////////////////////////////////////////////////
+			Answer = -1;
+
+			//( 实现该部分的Algorithm)
+			
+			//答案输出在标准输出(页面)。
+			System.out.println("#"+test_case+" "+Answer);
+		}
+	}
+}
+
+回文(palindrome)在程序书籍中也经常出现。因为存在左右对称性，可实现判断某个语句或数据对称的 Algorithm，
+从而解决相关问题(回文, 具有对称性的数据结构问题等)。
+
+重新回到问题，判断某个资料是否为回文并不难，但在长的字符串中找出并判断所有回文的方法并不那么简单。
+但仔细想想，根据如何实现Algorithm，可存在多种方法。
+额外编辑一个判断回文的函数，将字符串的一部分带入该函数中一一判断的方法；
+从前面开始读取字符串并保存，从预计到达回文的部分开始判断的方法等。
+此外还有其他(性能好的) 方法。但实现这些方法多少存在难度，且不易直观的理解。 
+
+因此想要介绍(虽然性能多少低)比较容易实现的方法。 (参考一下提示 [正确答案示例])
+
+在看以下示例前，请思考如何才能找出回文。
+
+指定搜索回文的字符串的起点。即查找相应起点开始的回文。但回文可能出现在字符串的任意位置，
+因此起点应移动于字符串的开始到最后。
+
+其次指定搜索回文的字符串的终点。即判断从之前指定的起点开始到刚才指定的终点结束的字符串是否为回文。
+
+之后通过设定的起点和终点实现判断回文的Algorithm 即可。
+若回文正确，则实现判断该回文的长度是否为目前为止发现的回文长度中最长的即可。
+
+[ 正确答案示例 ]
+import java.util.Scanner;
+import java.io.FileInputStream;
+
+/*
+使用的类名应为 Solution, 推荐尽可能使用 Solution.java。
+即便在这种情况，仍然可以通过 java Solution 命令执行程序。
+*/
+class Solution
+{
+	static int L, Answer;
+	
+	public static void main(String args[]) throws Exception
+	{
+		/*
+以下 Method 调用代码的含义是今后以读取文件来代替标准输入（键盘）。
+但为了计分，提交代码时必须删除 Method 或进行注释处理。
+		*/
+		//System.setIn(new FileInputStream("C:\\sample_input.txt"));
+
+		String S;
+
+		Scanner sc = new Scanner(System.in);
+		int T = sc.nextInt();
+
+		for(int test_case = 1; test_case <= T; test_case++)
+		{
+
+			/*
+			在标准输入中读取各测试用例。
+			*/
+			L = sc.nextInt();
+			S = sc.next();
+
+			//////////////////////////////////////////////////////////////////////
+			/*
+此部分包含各位实现 Algorithm。
+假设各位的正确答案被保存到 Answer 中。
+			 */
+			/////////////////////////////////////////////////////////////////////
+			Answer = 0;
+
+			//( 实现该部分的Algorithm。 )
+			int start, end, len; // 保存搜索字符串的起点、终点、长度的变量
+
+			for(int i=0; i<L; i++) {            // 移动起点
+for(int j=L-1; j>i; j--) {   // 移动终点					              start = i;                // 起点初期设置
+					end = j;       // 起点初期设置
+					len = 0;       // 长度初期设置
+					if(S.charAt(start) != S.charAt(end)) {//  比较起点文字和终点文字
+			continue;                        // 不同则跳转至下一个				}
+
+					// 以下语句仅在起点文字和终点文字相同时执行。
+					len = end - start + 1; // 首先算得长度。
+
+					// 判断是否为回文的语句, 将比较点向内移动一格
+// 比较点在中间或比较结果不同时停止。	
+
+do {
+						start++;
+						end--;
+					} while(start <= end && S.charAt(start) == S.charAt(end));
+
+					// 只有比较点在中间时才能成为回文。
+					if(start > end) {
+						if( len >= 3 && len > Answer) {
+							Answer = len;
+						}
+					}
+				}
+			}
+			
+			//答案输出在标准输出(页面)。
+			System.out.println("#"+test_case+" "+Answer);
+		}
+	}
+}
